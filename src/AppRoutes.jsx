@@ -7,7 +7,7 @@ import { ProtectRoute } from "./authentication/ProtectRoute";
 export const AppRoutes = ({user}) => {
   return (
     <Router>
-      <NavBar></NavBar>
+      <NavBar user={user}></NavBar>
       <Routes>
         <Route element={<ProtectRoute user={user} />}>
         <Route path="/" element={<ChatListPage/>}/>

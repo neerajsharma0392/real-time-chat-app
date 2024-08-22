@@ -1,10 +1,19 @@
 import "./App.css";
 import { AppRoutes } from "./AppRoutes";
+import { useUserDetails } from "./authentication";
+import { Loader } from "./Loader";
+
 
 function App() {
+  const { isLoading, user } = useUserDetails();
+  
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="App">
-      <AppRoutes></AppRoutes>
+      <AppRoutes user={user}></AppRoutes>
     </div>
   );
 }
