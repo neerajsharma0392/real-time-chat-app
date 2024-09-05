@@ -2,8 +2,8 @@ import { useState } from "react";
 import {useGetCall,postApi} from '../services'
 import { useUserDetails } from "./../authentication";
 import { useNavigate } from "react-router-dom";
-import { Loader } from "../Loader";
 
+import { Loader } from "../Loader";
 
 export const NewChatPage = () => {
   const [name, setName] = useState("");
@@ -12,6 +12,7 @@ export const NewChatPage = () => {
   const [members, setMembers] = useState([]);
   const navigate = useNavigate();
 
+
   if (isLoading) {
     return <Loader />;
   }
@@ -19,6 +20,7 @@ export const NewChatPage = () => {
   const add = (id) => {
     setMembers([...members, id]);
   };
+
 
   const remove=(id)=>{
     const copyMembers=members.filter(m=>m!=id);
