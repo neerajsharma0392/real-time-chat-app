@@ -3,6 +3,8 @@ import {useGetCall,postApi} from '../services'
 import { useUserDetails } from "./../authentication";
 import { useNavigate } from "react-router-dom";
 
+import { Loader } from "../Loader";
+
 export const NewChatPage = () => {
   const [name, setName] = useState("");
   const { user: currentUser } = useUserDetails();
@@ -10,9 +12,20 @@ export const NewChatPage = () => {
   const [members, setMembers] = useState([]);
   const navigate = useNavigate();
 
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   const add = (id) => {
     setMembers([...members, id]);
   };
+
+
+  const remove=(id)=>{
+    const copyMembers=members.filter(m=>m!=id);
+    setMembers([...copyMembers]);
+  }
 
   const createGroup = async (currentUserId) => {
     const res = await postApi("/new-chat", {
@@ -36,19 +49,20 @@ export const NewChatPage = () => {
       />
       <h3 className="mt-3">Add users</h3>
       <ul className="list-group mt-3">
-        {users.map((user) => (
+        {users
+        .filter(u=>u.id!=currentUser.uid)
+        .map((user) => (
           <li className="list-group-item" key={user.id}>
             <label>{user.name}</label>
-            {members.includes(user.id) || user.id == currentUser.uid ? (
+            {members.includes(user.id) ? (
               <button
-                onClick={() => add(user.id)}
+                onClick={() => remove(user.id)}
                 style={{
                   float: "right",
                 }}
-                className="btn btn-primary"
-                disabled
+                className="btn btn-danger"
               >
-                Added!
+                Remove
               </button>
             ) : (
               <button
