@@ -1,7 +1,7 @@
 import {getAuth} from 'firebase/auth'
 
 export const postApi = async (url, data) => {
-    url = "http://localhost:8080" + url;
+    url = "http://4.213.171.237:8080" + url;
     const currentUser = getAuth().currentUser;
 
     const res = await fetch(url, {
