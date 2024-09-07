@@ -3,7 +3,7 @@ import {getAuth} from 'firebase/auth';
 
 // /users
 export const useGetCall = (url, defaultValue) => {
-    url = "http://localhost:8080" + url;
+    url = "http://4.213.171.237:8080" + url;
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState(defaultValue);
 

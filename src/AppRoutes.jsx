@@ -4,6 +4,7 @@ import { NavBar } from "./navigation";
 import { ChatListPage } from "./chats/ChatListPage";
 import { ProtectRoute } from "./authentication/ProtectRoute";
 import { NewChatPage } from "./chats/NewChatPage";
+import { ChatPage } from "./chats/ChatPage";
 
 export const AppRoutes = ({user}) => {
   return (
@@ -11,9 +12,11 @@ export const AppRoutes = ({user}) => {
       <NavBar user={user}></NavBar>
       <Routes>
         <Route element={<ProtectRoute user={user} />}>
-        <Route path="/" element={<ChatListPage/>}/>
+          <Route path="/" element={<ChatListPage/>}/>
+          <Route path="/new-chat" element={<NewChatPage />} />
+          <Route path="/chat/:id" element={<ChatPage />} />
         </Route>
-        <Route path="/new-chat" element={<NewChatPage />} />
+        
         <Route path="/sign-in" element={<SignInPage />} />
       </Routes>
     </Router>
